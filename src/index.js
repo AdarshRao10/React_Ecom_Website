@@ -1,17 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDom from "react-dom";
+import App from "./app";
+import "../node_modules/bootstrap/dist/css/bootstrap.css";
+import {BrowserRouter} from "react-router-dom";
+//jab app component ko BrowserRouter router ke andhar rakha tabhi "You should not use <Link> outside a <Router>" ye problem solve hua.
+import reducers from "./store/index";
+import thunk from "redux-thunk";
+import { applyMiddleware, createStore } from "redux";
+import {Provider} from "react-redux";
+import "../node_modules/font-awesome/css/font-awesome.css";
+import {PersistGate} from "redux-persist/integration/react";
+import {persistStore,persistReducer} from "redux-persist";
+import {persistConfig} from "./store/index";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const persistReducers = persistReducer(persistConfig,reducers);
+let store = createStore(persistReducers,applyMiddleware(thunk));
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+ReactDom.render(
+    <Provider store={store}>
+        <BrowserRouter>
+        <PersistGate PersistGate loading={<h1>LOADING...</h1>} persistor={persistStore(store)}>
+           <App/>  
+        </PersistGate>
+        </BrowserRouter>
+    </Provider>,
+    //now call the root component , this code will render inside root component
+    document.getElementById("root")
+)

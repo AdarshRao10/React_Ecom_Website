@@ -1,0 +1,11 @@
+export const FETCH_ALL_PRODUCT = "FETCH_ALL_PRODUCT";
+export const PRODUCT_DATA_BY_ID = "ERROR"
+export const ADD_CART = "ADD_CART";
+export const REMOVE_CART = "REMOVE_CART";
+export const ADD_QUANTITY = "ADD_QUANTITY";
+export const REMOAVE_QUANTITY = "REMOVE_QUANTITY";
+export const LOADING = "LOADING";
+export const SHOW_ERROR = "SHOW_ERROR";
+export const UPDATE_QUANTITY="UPDATE_QUANTITY";
+export const NAVIGATE_CART = "NAVIGATE_CART";
+export const GET_CART = "GET_CART";
